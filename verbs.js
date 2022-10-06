@@ -1,8 +1,10 @@
-const ingles=[
-    'Home','Dog'
+const verbs=[
+    'open',
+    'close'
 ];
 
-const Espanol=[
-    'Hogar','Perro'
+const verbos=[
+    'abierto',
+    'cerrado'
 ];
 
