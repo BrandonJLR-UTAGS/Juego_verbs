@@ -1,9 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Nabla&family=Roboto:ital,wght@0,300;1,100&family=Rochester&family=Rubik+Dirt&family=Yesteryear&display=swap');
+
+
+/* tipos de letras::after
+font-family: 'Amiri Quran', serif;
+font-family: 'Nabla', cursive;
+font-family: 'Roboto', sans-serif;
+font-family: 'Rubik Dirt', cursive;
+font-family: 'Yesteryear', cursive;
+font-family: 'Rochester', cursive;
+
+
+
+*/
+body{
+    
+    background-image:url(/DLCS/Evangelion.jpg) ;
+   
+
+    background-size: cover;
+  background-repeat:no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+
+     font-family: 'Amiri Quran', serif;
+
+}
+
+.navbar-dark{
+    color: purple;
+}
+
 #verbs-constainer{
     margin: 0 35%;
 }
 
+h3{
+    font-family: 'Nabla', cursive;
+}
+
+
+
+#ShowVerb{
+color: #b04c4c;
+font-family: 'Rubik Dirt', cursive;
+
+}
+
 .verbs-answer{
     display: block;
+    color: aqua;
+}
+
+#all-right-answers{
+    color: #48ff00;
+    font-family: 'Rubik Dirt', cursive;
 }
 
 .rightAnswer,.rightAnswer:hover{

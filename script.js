@@ -1,43 +1,43 @@
-const fruits=['blackberry','apple'];
+const showVerb = document.getElementById("ShowVerb");
+const showImage = document.getElementById("ShowImage");
+const showAudio= document.getElementById("ShowAudio");
+//
+const first_verb = document.getElementById("first-verb");
+const second_verb = document.getElementById("second-verb");
+const third_verb = document.getElementById("third-verb");
+const fourth_verb = document.getElementById("fourth-verb");
 
-fruits.push('mango')
-fruits.sort()
-fruits[0]
-
-const showVerb=document.getElementById('ShowVerb');
-const showImage=document.getElementById('ShowImage');
-const showAudio=document.getElementById('ShowAudio');
-const first_verb=document.getElementById('first-verb');
-const second_verb=document.getElementById('second-verb');
-const third_verb=document.getElementById('third-verb');
-const fourth_verb=document.getElementById('fourth-verb');
-const next=document.getElementById('next');
-const verbsCounter=document.getElementById('verbs-counter');
-const allRightCounter=document.getElementById('all-right-answers');
-const verbsContainer=document.getElementById('verbs-container');
+//
+const next = document.getElementById("next");
+const verbsCounter = document.getElementById("verbs-counter");
+const allRightCounter = document.getElementById("all-right-answers");
+const verbsContainer = document.getElementById("verbs-container");
 
 const numberOfVerbs = verbs.length;
 
-let answersRoullete= [0,1,1,1];
-let positionsOfVerbs=[];
+let answersRoullete = [0,1,1,1];
+//
+let positionsOfVerbs =[];
+//
 let rightAnswer;
-let allRighAnswer;
+let allRighAnswer = 0;
 
 next.addEventListener('click',function(){
+    ponerVerbo();
     next.style.display='none';
-    showVerb.innerHTML="Deposita 200 bits";
+    
 });
 
 
 makeRandomList();
 
-let lastPosition=positionsOfVerbs=length-1;
+let lastPosition = positionsOfVerbs.length-1;
 
 function makeRandomList(){
-    for(var i=0; i<numberOfVerbs;i++){
+    for(var i = 0; i<numberOfVerbs;i++){
         positionsOfVerbs.push(i);
     }
-    positionsOfVerbs=positionsOfVerbs.sort(()=>Math.random()-0.5);
+    positionsOfVerbs=positionsOfVerbs.sort(() => Math.random() -0.5);
 }
 
 function buttonEffect(itsRight,button){
@@ -47,18 +47,18 @@ function buttonEffect(itsRight,button){
             button.classList.remove('rightAnswer');
 
         },1000);
-        rightAnswerCounter=rightAnswerCounter+1;
+        allRighAnswer = allRighAnswer+1;
     }else{
-        button.classList.add('WrongAnswer');
+        button.classList.add('wrongAnswer');
         setTimeout(function(){
-            button.classList.remove('WrongAnswer');
+            button.classList.remove('wrongAnswer');
 
         },1000);
        
     }
     setTimeout(function(){
         ponerVerbo();
-    },1000);
+    },600);
 }
 
 first_verb.addEventListener('click', function(){
@@ -78,14 +78,70 @@ fourth_verb.addEventListener('click', function(){
 });
 
 function shuffleAnswer(array){
-    let numberOfAnswerButtons=array.length;
+    let numberOfAnswerButtons = array.length;
+    
     let randomIndex;
-    while (numberOfAnswerButtons !=0){
-        randomIndex= Math.floor(Math.random()*numberOfAnswerButtons);
+    
+    while (numberOfAnswerButtons != 0){
+        randomIndex = Math.floor(Math.random() * numberOfAnswerButtons);
         numberOfAnswerButtons--; 
-        [array[numberOfAnswerButtons],array[randomIndex]]=[array[randomIndex],array[numberOfAnswerButtons]]   
+        [array[numberOfAnswerButtons],array[randomIndex]]=[
+            array[randomIndex],array[numberOfAnswerButtons]]   
     
     }
     return array;
 }
 
+function isItRight_(answer){
+    return answer==rightAnswer?true:false;
+}
+
+function randomVerbo(notThisOne){
+    theOne = Math.floor(Math.random()*verbos.length);
+    
+    return theOne == notThisOne?randomVerbo(notThisOne):theOne;
+}
+
+function ponerVerbo(){
+    answersRoullete= shuffleAnswer(answersRoullete);
+
+    let randomPosition = positionsOfVerbs[lastPosition];
+    let imgText= "<img src='images/"+verbs[randomPosition]+".jpg' height='140px' width='100px'>";
+
+
+    first_verb.classList.add("btn","btn-outline-primary","btn-md");
+    second_verb.classList.add("btn","btn-outline-primary","btn-md");
+    third_verb.classList.add("btn","btn-outline-primary","btn-md");
+    fourth_verb.classList.add("btn","btn-outline-primary","btn-md");
+
+
+    if(lastPosition>=0){
+        var just_position = lastPosition+1;
+        verbsCounter.innerHTML=""+just_position+" / "+numberOfVerbs;
+        allRightCounter.innerHTML="Right Answers: "+allRighAnswer;
+
+        showVerb.innerHTML=verbs[randomPosition];
+        showImage.innerHTML = imgText;
+
+        showAudio.src="audio/"+verbs[randomPosition]+".pm3";
+        showAudio.play();
+
+        first_verb.innerHTML=!answersRoullete[0]?verbos[randomPosition]:verbos[randomVerbo(randomPosition)];
+        second_verb.innerHTML=!answersRoullete[1]?verbos[randomPosition]:verbos[randomVerbo(randomPosition)];
+        third_verb.innerHTML=!answersRoullete[2]?verbos[randomPosition]:verbos[randomVerbo(randomPosition)];
+        fourth_verb.innerHTML=!answersRoullete[3]?verbos[randomPosition]:verbos[randomVerbo(randomPosition)];
+
+        rightAnswer=verbos[randomPosition];
+        lastPosition=lastPosition - 1;
+
+
+    }else{
+
+        verbsCounter.innerHTML="0/ "+numberOfVerbs;
+        allRighAnswer.innerHTML="Right anwers: "+allRighAnswer;
+        showVerb.innerHTML="Thanks you";
+
+        verbsContainer.innerHTML=" "
+
+    }
+}
