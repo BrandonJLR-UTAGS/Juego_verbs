@@ -58,7 +58,7 @@ function buttonEffect(itsRight,button){
     }
     setTimeout(function(){
         ponerVerbo();
-    },600);
+    },1000);
 }
 
 first_verb.addEventListener('click', function(){
@@ -106,7 +106,7 @@ function ponerVerbo(){
     answersRoullete= shuffleAnswer(answersRoullete);
 
     let randomPosition = positionsOfVerbs[lastPosition];
-    let imgText= "<img src='images/"+verbs[randomPosition]+".jpg' height='140px' width='100px'>";
+    let imgText= "<img src='images/"+verbs[randomPosition]+".jpg' height='200px' width='200px'>";
 
 
     first_verb.classList.add("btn","btn-outline-primary","btn-md");
@@ -123,7 +123,7 @@ function ponerVerbo(){
         showVerb.innerHTML=verbs[randomPosition];
         showImage.innerHTML = imgText;
 
-        showAudio.src="audio/"+verbs[randomPosition]+".pm3";
+        showAudio.src="audio/"+verbs[randomPosition]+".mp3";
         showAudio.play();
 
         first_verb.innerHTML=!answersRoullete[0]?verbos[randomPosition]:verbos[randomVerbo(randomPosition)];
